@@ -45,3 +45,137 @@ public class model {
         }
         return arr;
     }
+    static int[][] wayToStart(int[][] map, int fX, int fY) {
+        int way = -4;
+        int[] min = new int[2];
+        while (true) {
+
+            min = findMinAndShortWay(map, fX, fY);
+            fX = min[0];
+            fY = min[1];
+            if (map[fX][fY] == -2) {
+                // map[fX][fY] = way;
+                break;
+            }
+            map[fX][fY] = way;
+
+        }
+        return map;
+    }
+    static int[] findMinAndShortWay(int[][] map, int fX, int fY) {
+        int min[] = new int[2];
+        int minMax = 0;
+        try {
+            if (minMax <= map[fX - 1][fY]) {
+                minMax = map[fX - 1][fY];
+            }
+            if (minMax <= map[fX + 1][fY]) {
+                minMax = map[fX + 1][fY];
+            }
+            if (minMax <= map[fX][fY + 1]) {
+                minMax = map[fX][fY + 1];
+            }
+            if (minMax <= map[fX][fY - 1]) {
+                minMax = map[fX][fY - 1];
+            }
+
+            if (minMax <= map[fX - 1][fY - 1]) {
+                minMax = map[fX - 1][fY - 1];
+            }
+            if (minMax <= map[fX + 1][fY - 1]) {
+                minMax = map[fX + 1][fY - 1];
+            }
+            if (minMax <= map[fX + 1][fY + 1]) {
+                minMax = map[fX + 1][fY + 1];
+            }
+            if (minMax <= map[fX - 1][fY + 1]) {
+                minMax = map[fX - 1][fY + 1];
+            }
+
+            if (map[fX - 1][fY] >= -2 && map[fX - 1][fY] != -1) {
+                if (minMax >= map[fX - 1][fY]) {
+                    minMax = map[fX - 1][fY];
+                    min[0] = fX - 1;
+                    min[1] = fY;
+                }
+            }
+            if (map[fX + 1][fY] >= -2 && map[fX + 1][fY] != -1) {
+                if (minMax >= map[fX + 1][fY]) {
+                    minMax = map[fX + 1][fY];
+                    min[0] = fX + 1;
+                    min[1] = fY;
+                }
+            }
+            if (map[fX][fY + 1] >= -2 && map[fX][fY + 1] != -1) {
+                if (minMax >= map[fX][fY + 1]) {
+                    minMax = map[fX][fY + 1];
+                    min[0] = fX;
+                    min[1] = fY + 1;
+                }
+            }
+            if (map[fX][fY - 1] >= -2 && map[fX][fY - 1] != -1) {
+                if (minMax >= map[fX][fY - 1]) {
+                    minMax = map[fX][fY - 1];
+                    min[0] = fX;
+                    min[1] = fY - 1;
+                }
+            }
+
+            if (map[fX - 1][fY - 1] >= -2 && map[fX - 1][fY - 1] != -1) {
+                if (minMax >= map[fX - 1][fY - 1]) {
+                    minMax = map[fX - 1][fY - 1];
+                    min[0] = fX - 1;
+                    min[1] = fY - 1;
+                }
+            }
+            if (map[fX + 1][fY - 1] >= -2 && map[fX + 1][fY - 1] != -1) {
+                if (minMax >= map[fX + 1][fY - 1]) {
+                    minMax = map[fX + 1][fY - 1];
+                    min[0] = fX + 1;
+                    min[1] = fY - 1;
+                }
+            }
+            if (map[fX + 1][fY + 1] >= -2 && map[fX + 1][fY + 1] != -1) {
+                if (minMax >= map[fX + 1][fY + 1]) {
+                    minMax = map[fX + 1][fY + 1];
+                    min[0] = fX + 1;
+                    min[1] = fY + 1;
+                }
+            }
+            if (map[fX - 1][fY + 1] >= -2 && map[fX - 1][fY + 1] != -1) {
+                if (minMax >= map[fX - 1][fY + 1]) {
+                    minMax = map[fX - 1][fY + 1];
+                    min[0] = fX - 1;
+                    min[1] = fY + 1;
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException ae) {
+
+        }
+        return min;
+    }
+
+    static void printRow(int[][] arr, int sizeY, int sizeX) {
+        for (int i = 0; i < sizeY; i++) {
+            for (int j = 0; j < sizeX; j++) {
+
+                if (arr[i][j] == -1) {
+                    System.out.printf((char) 27 + "[38m█" + (char) 27 + "[0m");
+                } else if (arr[i][j] == -2) {
+                    System.out.printf((char) 27 + "[32m█" + (char) 27 + "[0m");
+                } else if (arr[i][j] == -3) {
+                    System.out.printf((char) 27 + "[34m█" + (char) 27 + "[0m");
+                } else if (arr[i][j] == -4) {
+                    System.out.printf((char) 27 + "[31m█" + (char) 27 + "[0m");
+                } else if (arr[i][j] == 0) {
+                    System.out.print(' ');
+                } else if (arr[i][j] > 0) {
+                    System.out.print(' ');
+                }
+                System.out.print("");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+}
