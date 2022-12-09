@@ -21,3 +21,27 @@ public class model {
         }
         return map;
     }
+    static int[][] volnaLi(int[][] arr, int startX, int startY, int way) {
+        if (arr[startX][startY] != -3) {
+            if (arr[startX][startY] != -2)
+                arr[startX][startY] = way;
+            if (arr[startX][startY - 1] != -1 && arr[startX][startY - 1] == 0 || arr[startX][startY - 1] > way) {
+                arr[startX][startY - 1] = way;
+                volnaLi(arr, startX, startY - 1, way + 1);
+            }
+            if (arr[startX - 1][startY] != -1 && arr[startX - 1][startY] == 0 || arr[startX - 1][startY] > way) {
+                arr[startX - 1][startY] = way;
+                volnaLi(arr, startX - 1, startY, way + 1);
+            }
+            if (arr[startX][startY + 1] != -1 && arr[startX][startY + 1] == 0 || arr[startX][startY + 1] > way) {
+                arr[startX][startY + 1] = way;
+                volnaLi(arr, startX, startY + 1, way + 1);
+            }
+            if (arr[startX + 1][startY] != -1 && arr[startX + 1][startY] == 0 || arr[startX + 1][startY] > way) {
+                arr[startX + 1][startY] = way;
+                volnaLi(arr, startX + 1, startY, way + 1);
+            }
+            // }
+        }
+        return arr;
+    }
